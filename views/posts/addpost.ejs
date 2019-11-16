@@ -1,0 +1,55 @@
+<%- include('../partials/_header.ejs') %>
+<%- include('../partials/_navbar.ejs') %>
+
+<main>
+    <%- include('../partials/_messages.ejs') %>
+
+    <h1 class="mt-5 px-5"> Add New Post </h1>
+    <form action="/posts/add" method="post" class="border border-light p-5">
+        <div class="form-group">
+            <label for="title">Title</label>
+            <input name="title" type="text" class="form-control"
+                value="<%= typeof (title) != 'undefined' ? title : '' %>" required>
+        </div>
+
+
+        <div class="form-group">
+            <label>Category</label>
+            <select name="category" class="browser-default custom-select" required>
+                <% categories.forEach(category => { %>
+                <% if(category._id === posts.category) { %>
+                <option selected label="<%= category.cname %>" value=" <%= category._id %> "></option>
+                <% } else { %>
+                <option label="<%= category.cname %> " value="<%= category._id %>"></option>
+                <% } %>
+                <%  });    %>
+            </select>
+        </div>
+
+
+
+
+        <div class="form-group">
+            <label for="author">Author</label>
+            <input name="author" type="text" class="form-control"
+                value="<%= typeof (author) != 'undefined' ? author : '' %>" required>
+        </div>
+
+        <div class="form-group">
+            <label for="body">Body</label>
+            <textarea name="body" class="form-control rounded-0" id="body" rows="3"
+                required><%= typeof (body) != 'undefined' ?body : '' %></textarea>
+        </div>
+
+        <label>Main Image(Thumbnail)</label>
+        <input type="file" name="mainImage" class="filepond" accept="image/png, image/jpeg, image/gif">
+        </div>  
+
+        <button type="submit" class="create-post btn btn-dark">Publish</button>
+
+    </form>
+
+</main>
+
+
+<%- include('../partials/_footer.ejs') %>

@@ -1,0 +1,53 @@
+<%- include('../partials/_header.ejs') %>
+<%- include('../partials/_navbar.ejs') %>
+
+
+<section id="add-category" class="my-5 p-5">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card border-secondary m-5" style="max-width: 25rem;">
+                <div class="card-header"> Add Category<br></div>
+                <div class="card-body">
+
+                    <form action="/categories/add" method="post">
+                        <div class="form-group">
+                            <input type="text" name="cname" class="form-control" placeholder="Enter Category.."
+                                required>
+                        </div>
+                        <button type="submit" class="btn btn-black btn-md mt-3">Submit</button>
+                    </form>
+
+                </div>
+                <div class="card-footer">
+                    <p class="card-text"></p>
+                </div>
+            </div>
+
+            <%- include('../partials/_messages.ejs') %>
+        </div>
+     
+
+        <div class="col-md-6">
+             
+            <div class="card mt-4">
+                <div class="card-header"> <h3> Latest Categories </h3> </div>
+                <ul class="list-group list-group-flush">
+                    <% categories.forEach(category => { %>
+                    <li class="list-group-item"> <%= category.cname %> </li>
+                    <% }) %>
+                </ul>
+            </div>
+        </div>
+
+
+    </div>
+</section>
+
+
+
+
+
+
+
+
+<%- include('../partials/_footer.ejs') %>

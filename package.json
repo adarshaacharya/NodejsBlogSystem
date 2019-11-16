@@ -1,0 +1,30 @@
+{
+  "name": "node-blog-system",
+  "version": "1.0.0",
+  "description": "Blogging system using node js",
+  "main": "index.js",
+  "scripts": {
+    "start": "node src/app.js",
+    "dev": "nodemon src/app.js"
+  },
+  "author": "Aadarsha",
+  "license": "ISC",
+  "dependencies": {
+    "@hapi/joi": "^16.1.7",
+    "bcryptjs": "^2.4.3",
+    "connect-flash": "^0.1.1",
+    "ejs": "^2.7.1",
+    "express": "^4.17.1",
+    "express-session": "^1.17.0",
+    "express-validation": "^1.0.3",
+    "mongoose": "^5.7.7",
+    "nodemailer": "^6.3.1",
+    "passport": "^0.4.0",
+    "passport-local": "^1.0.0",
+    "socket.io": "^2.3.0",
+    "truncate": "^2.1.0"
+  },
+  "devDependencies": {
+    "dotenv": "^8.2.0"
+  }
+}

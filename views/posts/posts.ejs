@@ -1,0 +1,71 @@
+<%- include('../partials/_header.ejs') %>
+<%- include('../partials/_navbar.ejs') %>
+
+<main class="py-5">
+   <%- include('../partials/_messages.ejs') %>   
+   
+   <section id="posts">
+
+    <% posts.forEach(post => { %>
+        <div class="card m-5 p-4">
+            <div class="card-body">
+                <h2 class="card-title bg-light"><%= post.title %> </h2>  
+                <img class="main-image" height="270px" src="<%= post.mainImagePath %>" /><br />
+                <hr/>
+                <%- post.body.substring(0, 460) %>...
+                <hr/>
+                <a href="/posts/<%=post._id%>" class="btn btn-dark">View Full Post</a>
+                <hr />
+                 Posted by <b><%=post.author %></b> on <b><%= post.date %></b>
+                <hr/>
+            </div>
+        </div>
+    <% }) %> 
+   </section>
+
+</main>
+
+
+
+<script>
+
+const socket = io()
+
+function renderTemplate(item, imgStr) {
+    return `
+    <div class="card m-5 p-4">
+        <div class="card-body">
+            <h2 class="card-title bg-light">${item.title}</h2>  
+            <img class="main-image" height="270px" src="${imgStr}" /><br />
+            <hr/>
+            ${item.body.substring(0, 460)}...
+            <hr/>
+            <a href="/posts/${item._id}" class="btn btn-dark">View Full Post</a>
+            <hr />
+             Posted by <b><${item.author}</b> on <b>${item.date}</b>
+            <hr/>
+        </div>
+    </div>
+`
+}
+
+let section = document.getElementById('posts')
+
+socket.on('server:postCreated', (resData) => {
+    fetch('/api/posts')
+    .then(res => res.json())
+    .then(data => {
+        section.innerHTML = data.map(item => {
+            let img = btoa(
+                new Uint8Array(item.mainImage.data)
+                .reduce((data, byte) => data + String.fromCharCode(byte), '')  
+            );
+            let imgStr = `data:${item.mainImageType};base64,${img}`
+            return renderTemplate(item, imgStr);
+        })
+    })
+})
+</script>
+
+
+<%- include('../partials/_footer.ejs') %>
