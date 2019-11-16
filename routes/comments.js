@@ -64,22 +64,22 @@ router.post('/posts/replyComment',checkAuthenticated, async(req, res) => {
     )
 
     // Sending message with nodemailer
-    let transporter = nodemailer.createTransport({
-      service: 'gmail',
-      auth: {
-          user: process.env.NODEMAILER_EMAIL, 
-          pass: process.env.NODEMAILER_PASS
-      }
-  });
+  //   let transporter = nodemailer.createTransport({
+  //     service: 'gmail',
+  //     auth: {
+  //         user: process.env.NODEMAILER_EMAIL, 
+  //         pass: process.env.NODEMAILER_PASS
+  //     }
+  // });
 
-  let info = await transporter.sendMail({
-      from: 'Node JS Blogging System 👻', 
-      to: req.body.commentEmail, 
-      subject: 'New Reply in Post 👻', 
-      text: `${req.body.name} has replied your comment.
-            View here  for details:      
-             http://localhost:5000/posts/${req.body.postId}`
-  });
+  // let info = await transporter.sendMail({
+  //     from: 'Node JS Blogging System 👻', 
+  //     to: req.body.commentEmail, 
+  //     subject: 'New Reply in Post 👻', 
+  //     text: `${req.body.name} has replied your comment.
+  //           View here  for details:      
+  //            http://localhost:5000/posts/${req.body.postId}`
+  // });
 
     await req.flash("success_msg", "Comment replied. Notifications has been sent to user on email.");
 
