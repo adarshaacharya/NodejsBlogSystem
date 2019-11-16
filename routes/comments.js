@@ -65,10 +65,7 @@ router.post('/posts/replyComment',checkAuthenticated, async(req, res) => {
 
     // Sending message with nodemailer
     let transporter = nodemailer.createTransport({
-      host: 'smtp.gmail.com',
-      port: 587,
-      secure: false,
-      requireTLS: true,
+      service: 'gmail',
       auth: {
           user: process.env.NODEMAILER_EMAIL, 
           pass: process.env.NODEMAILER_PASS
