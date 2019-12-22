@@ -13,6 +13,8 @@ const socketio = require('socket.io')
 
 
 const app = express()
+// prevent stack traces on production
+app.set("env", process.env.NODE_ENV);
 
 // Socket setup
 const http = require('http')
